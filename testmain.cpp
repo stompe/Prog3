@@ -1,5 +1,5 @@
 #include "include/GameEngine.h"
-#include "include/StaticSprite.h"
+#include "include/DynamicSprite.h"
 #include "include/Level.h"
 
 int main(int argc, char* args[])
@@ -8,11 +8,11 @@ int main(int argc, char* args[])
 
 	Level* level = new Level("LevelOne");
 
-	Sprite* sprite = new Sprite(0,0,"res/hello.bmp",0,0);
-	Sprite* spritetwo = new Sprite(0,0,"res/Green.bmp",300,300);
-	Sprite* spritethree = new Sprite(0,0,"res/Green.bmp",400,300);
-	Sprite* spritefour = new Sprite(0,0,"res/Green.bmp",300,400);
-	Sprite* spritefive = new Sprite(0,0,"res/Green.bmp",100,300);
+	DynamicSprite* sprite = new DynamicSprite(680,480,"res/hello.bmp",-540,0);
+	DynamicSprite* spritetwo = new DynamicSprite(20,20,"res/Green.bmp",300,100);
+	DynamicSprite* spritethree = new DynamicSprite(20,20,"res/Green.bmp",400,200);
+	DynamicSprite* spritefour = new DynamicSprite(20,20,"res/Green.bmp",300,300);
+	DynamicSprite* spritefive = new DynamicSprite(20,20,"res/Green.bmp",100,400);
 
 	level->add(sprite);
 	level->add(spritetwo);
