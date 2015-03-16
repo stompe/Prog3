@@ -32,7 +32,7 @@ void Level::update()
 	}
 }
 
-void Level::add(Sprite* sprite)
+void Level::add(DynamicSprite* sprite)
 {
 	sprite_list.push_back(sprite);
 }

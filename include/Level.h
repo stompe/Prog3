@@ -1,7 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "Sprite.h"
+#include "DynamicSprite.h"
 #include <vector>
 #include <string>
 #include "SDL2/SDL.h"
@@ -16,13 +16,13 @@ public:
 
 	void draw(SDL_Surface* screenSurface);
 	void update();
-	void add(Sprite* sprite);
+	void add(DynamicSprite* sprite);
 
 	inline std::string getLevelName(){return level_name;}
 
 private:
 
-	std::vector<Sprite*> sprite_list;
+	std::vector<DynamicSprite*> sprite_list;
 	std::string level_name;
 };
 

@@ -19,7 +19,7 @@ Sprite::~Sprite()
 
 void Sprite::tick()
 {
-	x = x + 1;
+	
 }
 
 void Sprite::draw(SDL_Surface* screenSurface)

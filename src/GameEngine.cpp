@@ -105,5 +105,5 @@ void GameEngine::draw()
 	SDL_RenderClear(render);
 	SDL_RenderCopy(render,screen_texture,NULL,NULL);
 	SDL_RenderPresent(render);
-	//SDL_UpdateWindowSurface(window);
+	SDL_UpdateWindowSurface(window);
 }
