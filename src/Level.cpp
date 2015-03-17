@@ -12,6 +12,8 @@ Level::~Level()
 		delete sprite_list[i];
 	}
 
+	delete controller;
+
 	sprite_list.clear();
 	printf("\nLevel deconstructed");
 }

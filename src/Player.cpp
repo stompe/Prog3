@@ -8,5 +8,6 @@ Player::Player(std::string player_name, DynamicSprite* player_sprite)
 
 Player::~Player()
 {
-	delete player_sprite;
+
+	printf("\nPlayer deconstructed");
 }
