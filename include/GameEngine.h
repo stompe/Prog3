@@ -77,6 +77,7 @@ private:
 	SDL_Renderer* render;
 
 	void init();
+	void handleInput();
 	void update();
 	void draw();
 };

@@ -66,6 +66,8 @@ void GameEngine::run()
 	{
 		frame_start = SDL_GetTicks();
 
+		handleInput();
+
 		update();
 
 		draw();
@@ -89,6 +91,11 @@ void GameEngine::run()
 			}
 		}
 	}
+}
+
+void GameEngine::handleInput()
+{
+	level->handleInput(event);
 }
 
 void GameEngine::update()

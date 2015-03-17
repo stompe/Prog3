@@ -16,6 +16,11 @@ Level::~Level()
 	printf("\nLevel deconstructed");
 }
 
+void Level::handleInput(SDL_Event event)
+{
+	controller->handleControllerInput(event);
+}
+
 void Level::draw(SDL_Surface* screen_surface)
 {
 	for(int i = 0; i < sprite_list.size(); i++)
