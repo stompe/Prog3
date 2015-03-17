@@ -8,6 +8,8 @@ Controller::Controller(Player* player)
 Controller::~Controller()
 {
 	delete player;
+	
+	printf("\nController deconstructed");
 }
 
 void Controller::moveControllerPlayerInX(int xPixels)
