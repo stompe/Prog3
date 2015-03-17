@@ -28,7 +28,7 @@ void Level::update()
 {
 	for(int i = 0; i < sprite_list.size(); i++)
 	{
-		sprite_list[i]->tick();
+		sprite_list[i]->update();
 	}
 }
 

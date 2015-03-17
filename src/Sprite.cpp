@@ -17,7 +17,7 @@ Sprite::~Sprite()
 	printf("\nSprite deconstructed");
 }
 
-void Sprite::tick()
+void Sprite::update()
 {
 	
 }

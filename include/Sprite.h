@@ -13,7 +13,7 @@ public:
 	~Sprite();
 
 	void draw(SDL_Surface* screen_surface);
-	void tick();
+	void update();
 
 	inline int getSpriteWidth(){return width;}
 	inline int getSpriteHeight(){return height;}

@@ -27,7 +27,7 @@ void DynamicSprite::move(int xPixels, int yPixels)
 	setSpritePosition(getSpriteXPosition() + xPixels, getSpriteYPosition() + yPixels);
 }
 
-void DynamicSprite::tick()
+void DynamicSprite::update()
 {
 	if(getSpriteXPosition() >= 0 && getSpriteXPosition() + getSpriteWidth() < 640 && getSpriteFilepath() != "res/hello.bmp") 
 		moveInX(1);
