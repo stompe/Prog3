@@ -22,12 +22,12 @@ void Sprite::tick()
 	
 }
 
-void Sprite::draw(SDL_Surface* screenSurface)
+void Sprite::draw(SDL_Surface* screen_surface)
 {
 	SDL_Rect offset;
 
 	offset.x = x;
 	offset.y = y;
 
-	SDL_BlitSurface(image,NULL,screenSurface,&offset);
+	SDL_BlitSurface(image,NULL,screen_surface,&offset);
 }

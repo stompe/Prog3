@@ -13,7 +13,7 @@ GameEngine::GameEngine(std::string game_title, int window_width, int window_heig
 
 	frame_ms = 1000.0 / frames_per_second;
 	window = NULL;
-	screenSurface = NULL;
+	screen_surface = NULL;
 }
 
 GameEngine::~GameEngine()
@@ -50,7 +50,7 @@ void GameEngine::init()
 		else
 		{
 			//Get window surface
-			screenSurface = SDL_GetWindowSurface(window);
+			screen_surface = SDL_GetWindowSurface(window);
 		}
 	}
 	render = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -98,8 +98,9 @@ void GameEngine::update()
 
 void GameEngine::draw()
 {
-	level->draw(screenSurface);
-	screen_texture = SDL_CreateTextureFromSurface(render,screenSurface);
+	SDL_SetWindowTitle(window, level->getLevelName().c_str());
+	level->draw(screen_surface);
+	screen_texture = SDL_CreateTextureFromSurface(render,screen_surface);
 	//SDL_FreeSurface(screenSurface);
 	SDL_SetRenderDrawColor(render, 0,255,0,255);
 	SDL_RenderClear(render);

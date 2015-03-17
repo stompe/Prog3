@@ -12,7 +12,7 @@ public:
 	Sprite(int width, int height, std::string filepath, int x, int y);
 	~Sprite();
 
-	void draw(SDL_Surface* screenSurface);
+	void draw(SDL_Surface* screen_surface);
 	void tick();
 
 	inline int getSpriteWidth(){return width;}

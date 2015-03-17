@@ -14,7 +14,7 @@ public:
 	Level(std::string level_name);
 	~Level();
 
-	void draw(SDL_Surface* screenSurface);
+	void draw(SDL_Surface* screen_surface);
 	void update();
 	void add(DynamicSprite* sprite);
 

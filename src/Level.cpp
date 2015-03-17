@@ -16,11 +16,11 @@ Level::~Level()
 	printf("\nLevel deconstructed");
 }
 
-void Level::draw(SDL_Surface* screenSurface)
+void Level::draw(SDL_Surface* screen_surface)
 {
 	for(int i = 0; i < sprite_list.size(); i++)
 	{
-		sprite_list[i]->draw(screenSurface);
+		sprite_list[i]->draw(screen_surface);
 	}
 }
 
