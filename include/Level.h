@@ -19,6 +19,10 @@ public:
 	void add(DynamicSprite* sprite);
 
 	inline std::string getLevelName(){return level_name;}
+	inline void setLevelName(std::string new_level_name){level_name = new_level_name;}
+
+	inline std::vector<DynamicSprite*> getLevelSpriteList(){return sprite_list;}
+	inline void setLevelSpriteList(std::vector<DynamicSprite*> new_sprite_list){sprite_list = new_sprite_list;}
 
 private:
 

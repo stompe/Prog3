@@ -31,8 +31,3 @@ void Sprite::draw(SDL_Surface* screenSurface)
 
 	SDL_BlitSurface(image,NULL,screenSurface,&offset);
 }
-
-SDL_Surface* Sprite::getImage()
-{
-	return image;
-}

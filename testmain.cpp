@@ -20,7 +20,7 @@ int main(int argc, char* args[])
 	level->add(spritefour);
 	level->add(spritefive);
 
-	gameEngine->setLevel(level);
+	gameEngine->setWindowLevel(level);
 
 	gameEngine->run();
 
