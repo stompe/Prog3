@@ -81,7 +81,7 @@ void GameEngine::run()
 			SDL_Delay(delay_ms);
 		}
 
-		std::cout << delay_ms << std::endl;
+		//std::cout << delay_ms << std::endl;
 
 		while(SDL_PollEvent(&event) != 0)
 		{

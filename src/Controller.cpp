@@ -1,8 +1,10 @@
 #include "../include/Controller.h"
+#include <iostream>
 
 Controller::Controller(Player* player)
 {
 	this->player = player;
+	//keyHandler = new KeyboardHandler();
 }
 
 Controller::~Controller()
@@ -24,42 +26,45 @@ void Controller::moveControllerPlayerInY(int yPixels)
 
 void Controller::handleControllerInput(SDL_Event event)
 {
+	printf("before Switch\n");
 	switch(event.type)
 		{
 			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_UP)
-					moveControllerPlayerInY(-5);
-			
-
-				if (event.key.keysym.sym == SDLK_DOWN)
-					moveControllerPlayerInY(5);
-				
-
-				if (event.key.keysym.sym == SDLK_LEFT)
-					moveControllerPlayerInX(-5);
-			
-				if (event.key.keysym.sym == SDLK_RIGHT)
-					moveControllerPlayerInX(5);	
+					keyHandler->handleKeyboardEvent(event,1);
 				break;
 			
 			case SDL_KEYUP:
-				if (event.key.keysym.sym == SDLK_UP)
-					moveControllerPlayerInY(0);
-			
-
-				if (event.key.keysym.sym == SDLK_DOWN)
-					moveControllerPlayerInY(0);
-				
-
-				if (event.key.keysym.sym == SDLK_LEFT)
-					moveControllerPlayerInX(0);
-			
-				if (event.key.keysym.sym == SDLK_RIGHT)
-					moveControllerPlayerInX(0);	
-
+					keyHandler->handleKeyboardEvent(event,0);
 				break;
 			
 			default:
 				break;
 		}
+	printf("after Switch\n");
+	executeControllerInput();
+}
+
+void Controller::executeControllerInput()
+{
+	const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+	printf("start of exeConInput\n");
+	if(keystate[SDL_SCANCODE_UP])
+	{
+		moveControllerPlayerInY(-5);
+	}
+	printf("after first if exi\n");
+	if(keystate[SDL_SCANCODE_DOWN])
+	{
+		moveControllerPlayerInY(5);
+	}
+
+	if(keystate[SDL_SCANCODE_LEFT])
+	{
+		moveControllerPlayerInX(-5);
+	}
+
+	if(keystate[SDL_SCANCODE_RIGHT])
+	{
+		moveControllerPlayerInX(5);
+	}
 }

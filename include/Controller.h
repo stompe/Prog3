@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "SDL2/SDL.h"
+#include "KeyboardHandler.h"
 
 class Controller
 {
@@ -23,6 +24,9 @@ public:
 private:
 
 	Player* player;
+	KeyboardHandler* keyHandler;
+
+	void executeControllerInput();
 };
 
 #endif
