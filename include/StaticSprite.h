@@ -7,7 +7,7 @@ class StaticSprite : public Sprite
 
 public:
 
-	StaticSprite(int width, int height, std::string filepath, int x, int y);
+	StaticSprite(std::string filepath, int x, int y, SDL_Renderer* render);
 
 private:
 

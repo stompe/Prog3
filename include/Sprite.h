@@ -9,10 +9,10 @@ class Sprite
 
 public:
 
-	Sprite(int width, int height, std::string filepath, int x, int y);
+	Sprite(std::string filepath, int x, int y, SDL_Renderer* render);
 	~Sprite();
 
-	void draw(SDL_Surface* screen_surface);
+	void draw(SDL_Renderer* render);
 	void update();
 
 	inline int getSpriteWidth(){return width;}
@@ -31,20 +31,19 @@ public:
 	inline std::string getSpriteFilepath(){return filepath;}
 	inline void setSpriteFilepath(std::string new_filepath){filepath = new_filepath;}
 
-	inline SDL_Surface* getSpriteImage(){return image;};
-	inline void setSpriteImage(SDL_Surface* new_image){image = new_image;}
 
 private:
 
 	int width;
 	int height;
-
 	int x;
 	int y;
 
 	std::string filepath;
 
-	SDL_Surface* image;
+	SDL_Texture* texture;
+
+	SDL_Rect offset;
 
 };
 

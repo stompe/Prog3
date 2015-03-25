@@ -1,33 +1,41 @@
 #include "../include/Sprite.h"
 
-Sprite::Sprite(int width, int height, std::string filepath, int x, int y)
+Sprite::Sprite(std::string filepath, int x, int y, SDL_Renderer* render)
 {
-	this->width = width;
-	this->height = height;
 	this->filepath = filepath;
 	this->x = x;
 	this->y = y;
-	image = SDL_LoadBMP(filepath.c_str());
+	SDL_Surface* image = SDL_LoadBMP(filepath.c_str());
+	this->width = image->w;
+	this->height = image->h;
+
+	offset.x = x;
+	offset.y = y;
+	offset.w = width;
+	offset.h = height;
+
+	texture = SDL_CreateTextureFromSurface(render, image);
+	SDL_FreeSurface(image);
+
+
 }
 
 Sprite::~Sprite()
 {
-	SDL_FreeSurface(image);
-	image = NULL;
+	SDL_DestroyTexture(texture);
+	texture = NULL;
 	printf("\nSprite deconstructed");
 }
 
 void Sprite::update()
 {
-	
+	offset.x = this->x;
+	offset.y = this->y;
+	offset.w = this->width;
+	offset.h = this->height;
 }
 
-void Sprite::draw(SDL_Surface* screen_surface)
+void Sprite::draw(SDL_Renderer* render)
 {
-	SDL_Rect offset;
-
-	offset.x = x;
-	offset.y = y;
-
-	SDL_BlitSurface(image,NULL,screen_surface,&offset);
+	SDL_RenderCopy(render, texture, NULL, &offset);
 }

@@ -8,7 +8,7 @@ class DynamicSprite : public Sprite
 
 public:
 
-	DynamicSprite(int width, int height, std::string filepath, int x, int y);
+	DynamicSprite(std::string filepath, int x, int y, SDL_Renderer* render);
 	~DynamicSprite();
 
 	void moveInX(int xPixels);

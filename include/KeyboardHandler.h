@@ -8,7 +8,7 @@ class KeyboardHandler
 public:
 	KeyboardHandler();
 	~KeyboardHandler();
-	void handleKeyboardEvent(SDL_Event event, int state);
+	void handleKeyboardEvent();
 	bool isPressed(int keyCode);
 	bool isReleased(int keyCode);
 

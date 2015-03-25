@@ -5,26 +5,21 @@ KeyboardHandler::KeyboardHandler()
 {
 }
 
-void KeyboardHandler::handleKeyboardEvent(SDL_Event event, int state)
+void KeyboardHandler::handleKeyboardEvent()
 {
-	//keystate[event.key.keysym.sym] = state;
-	/**
-	if(keyCode > 0 && keyCode < 256)
-	{
-		return keyState[keyCode];
-	}
-	return false;
-	*/
+
 }
 
 bool KeyboardHandler::isPressed(int keyCode)
 {
-	//return (keystate[keyCode] == 1);
-	return false;
+	const Uint8* keystate = SDL_GetKeyboardState(NULL);
+
+	return (keystate[keyCode] == 1);
 }
 
 bool KeyboardHandler::isReleased(int keyCode)
 {
-	//return (keystate[keyCode] == 0);
-	return false;
+	const Uint8* keystate = SDL_GetKeyboardState(NULL);
+	
+	return (keystate[keyCode] == 0);
 }

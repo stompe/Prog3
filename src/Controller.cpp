@@ -4,12 +4,13 @@
 Controller::Controller(Player* player)
 {
 	this->player = player;
-	//keyHandler = new KeyboardHandler();
+	sound = Mix_LoadWAV("res/sound.wav");
 }
 
 Controller::~Controller()
 {
 	delete player;
+	Mix_FreeChunk(sound);
 	
 	printf("\nController deconstructed");
 }
@@ -24,9 +25,9 @@ void Controller::moveControllerPlayerInY(int yPixels)
 	player->getPlayerSprite()->moveInY(yPixels);
 }
 
-void Controller::handleControllerInput(SDL_Event event)
+void Controller::handleControllerInput(SDL_Event event, std::vector<DynamicSprite*> sprites)
 {
-	printf("before Switch\n");
+	/*printf("before Switch\n");
 	switch(event.type)
 		{
 			case SDL_KEYDOWN:
@@ -41,30 +42,130 @@ void Controller::handleControllerInput(SDL_Event event)
 				break;
 		}
 	printf("after Switch\n");
-	executeControllerInput();
+	*/
+	executeControllerInput(sprites);
 }
 
-void Controller::executeControllerInput()
+void Controller::executeControllerInput(std::vector<DynamicSprite*> sprites)
 {
-	const Uint8 *keystate = SDL_GetKeyboardState(NULL);
-	printf("start of exeConInput\n");
-	if(keystate[SDL_SCANCODE_UP])
+	if(keyboard_handler->isPressed(SDL_SCANCODE_UP))
 	{
 		moveControllerPlayerInY(-5);
+		if(checkAllCollision(sprites))
+		{
+			printf("Collision top\n");
+			moveControllerPlayerInY(-(-5));
+			Mix_PlayChannel(-1, sound, 0);
+		}
 	}
-	printf("after first if exi\n");
-	if(keystate[SDL_SCANCODE_DOWN])
+
+	if(keyboard_handler->isPressed(SDL_SCANCODE_DOWN))
 	{
 		moveControllerPlayerInY(5);
+		if(checkAllCollision(sprites))
+		{
+			printf("Collision bot\n");
+			moveControllerPlayerInY(-(5));
+			Mix_PlayChannel(-1, sound, 0);
+		}
 	}
 
-	if(keystate[SDL_SCANCODE_LEFT])
+	if(keyboard_handler->isPressed(SDL_SCANCODE_LEFT))
 	{
 		moveControllerPlayerInX(-5);
+		if(checkAllCollision(sprites))
+		{
+			printf("Collision left\n");
+			moveControllerPlayerInX(-(-5));
+			Mix_PlayChannel(-1, sound, 0);
+		}
 	}
-
-	if(keystate[SDL_SCANCODE_RIGHT])
+	if(keyboard_handler->isPressed(SDL_SCANCODE_RIGHT))
 	{
 		moveControllerPlayerInX(5);
+		if(checkAllCollision(sprites))
+		{
+			printf("Collision right\n");
+			moveControllerPlayerInX(-(5));
+			Mix_PlayChannel(-1, sound, 0);
+		}
 	}
+}
+
+bool Controller::checkAllCollision(std::vector<DynamicSprite*> sprites)
+{
+	bool collided = NULL;
+	SDL_Rect a, b;
+	DynamicSprite* pSprite = player->getPlayerSprite();
+	a.x = pSprite->getSpriteXPosition();
+	a.y = pSprite->getSpriteYPosition();
+	a.h = pSprite->getSpriteWidth();
+	a.w = pSprite->getSpriteHeight();
+
+
+	for(int i = 0; i < sprites.size(); i++)
+	{
+		if(sprites[i] != pSprite)
+		{
+				Sprite* s = sprites[i];
+				b.x = s->getSpriteXPosition();
+				b.y = s->getSpriteYPosition();
+				b.h = s->getSpriteWidth();
+				b.w = s->getSpriteHeight();
+				if(checkCollision(a,b))
+				{	
+					collided = true;
+					return collided;
+				}
+				else
+					collided = false;
+
+		}
+	}
+	return collided;
+}
+
+
+bool Controller::checkCollision(SDL_Rect a, SDL_Rect b)
+{
+	int leftA, leftB;
+	int rightA, rightB;
+	int topA, topB;
+	int bottomA, bottomB;
+
+	//Calculate the sides of rect A
+	leftA = a.x;
+	rightA = a.x + a.w;
+	topA = a.y;
+	bottomA = a.y + a.h;
+
+	//Calculate the sides of rect B
+	leftB = b.x;
+	rightB = b.x + b.w;
+	topB = b.y;
+	bottomB = b.y + b.h;
+
+	//if any of the sides from A are outside of B
+	if(bottomA <= topB)
+	{
+		return false;
+	}
+
+	if(topA >= bottomB)
+	{
+		return false;
+	}
+
+	if(rightA <= leftB)
+	{
+		return false;
+	}
+
+	if(leftA >= rightB)
+	{
+		return false;
+	}
+
+	//If none of the sides from A are outside B
+	return true;
 }

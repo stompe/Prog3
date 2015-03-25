@@ -1,7 +1,7 @@
 #include "../include/DynamicSprite.h"
 
-DynamicSprite::DynamicSprite(int width, int height, std::string filepath, int x, int y)
-: Sprite(width, height, filepath, x, y)
+DynamicSprite::DynamicSprite(std::string filepath, int x, int y, SDL_Renderer* render)
+: Sprite(filepath, x, y, render)
 {
 
 }
@@ -29,5 +29,5 @@ void DynamicSprite::move(int xPixels, int yPixels)
 
 void DynamicSprite::update()
 {
-	
+	Sprite::update();
 }

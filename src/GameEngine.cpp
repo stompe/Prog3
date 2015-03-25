@@ -14,6 +14,7 @@ GameEngine::GameEngine(std::string game_title, int window_width, int window_heig
 	frame_ms = 1000.0 / frames_per_second;
 	window = NULL;
 	screen_surface = NULL;
+	init();
 }
 
 GameEngine::~GameEngine()
@@ -35,7 +36,7 @@ GameEngine::~GameEngine()
 
 void GameEngine::init()
 {
-	if(SDL_Init(SDL_INIT_VIDEO) < 0)
+	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		printf("SDL could not initialize SDL_ERROR: %s\n", SDL_GetError() );
 	}
@@ -49,19 +50,24 @@ void GameEngine::init()
 		}
 		else
 		{
-			//Get window surface
-			screen_surface = SDL_GetWindowSurface(window);
+
+		}
+		if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+		{
+			printf("kunde inte ladda Mixer\n");
 		}
 	}
+
 	render = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	SDL_SetRenderDrawColor(render, 0,255,0,255);
 }
 
 void GameEngine::run()
 {
-	init();
+
 
 	bool quit = false;
-
+	level->playMusic();
 	while(!quit)
 	{
 		frame_start = SDL_GetTicks();
@@ -106,12 +112,7 @@ void GameEngine::update()
 void GameEngine::draw()
 {
 	SDL_SetWindowTitle(window, level->getLevelName().c_str());
-	level->draw(screen_surface);
-	screen_texture = SDL_CreateTextureFromSurface(render,screen_surface);
-	//SDL_FreeSurface(screenSurface);
-	SDL_SetRenderDrawColor(render, 0,255,0,255);
 	SDL_RenderClear(render);
-	SDL_RenderCopy(render,screen_texture,NULL,NULL);
+	level->draw(render);
 	SDL_RenderPresent(render);
-	SDL_UpdateWindowSurface(window);
 }

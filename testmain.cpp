@@ -9,12 +9,12 @@ int main(int argc, char* args[])
 	GameEngine* gameEngine = new GameEngine("Games are awesome",640,480,60);
 
 	Level* level = new Level("LevelOne");
-
-	DynamicSprite* sprite = new DynamicSprite(680,480,"res/hello.bmp",0,0);
-	DynamicSprite* spritetwo = new DynamicSprite(20,20,"res/Green.bmp",300,100);
-	DynamicSprite* spritethree = new DynamicSprite(20,20,"res/Green.bmp",400,200);
-	DynamicSprite* spritefour = new DynamicSprite(20,20,"res/Green.bmp",300,300);
-	DynamicSprite* spritefive = new DynamicSprite(20,20,"res/Green.bmp",100,400);
+	SDL_Renderer* render = gameEngine->getWindowRenderer();
+	Sprite* background = new Sprite("res/hello.bmp",0,0,render);
+	DynamicSprite* spritetwo = new DynamicSprite("res/Green.bmp",300,100,render);
+	DynamicSprite* spritethree = new DynamicSprite("res/Green.bmp",400,200,render);
+	DynamicSprite* spritefour = new DynamicSprite("res/Green.bmp",300,300,render);
+	DynamicSprite* spritefive = new DynamicSprite("res/Green.bmp",100,400,render);
 
 	Player* player_one = new Player("Adam",spritetwo);
 
@@ -22,7 +22,7 @@ int main(int argc, char* args[])
 
 	level->setLevelController(controller);
 
-	level->add(sprite);
+	level->addBackground(background);
 	level->add(player_one->getPlayerSprite());
 	level->add(spritethree);
 	level->add(spritefour);

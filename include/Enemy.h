@@ -6,7 +6,7 @@
 class Enemy : DynamicSprite
 {
 public:
-	Enemy(std::string name, int widht, int height, std::string filepath, int x, int y );
+	Enemy(std::string name, std::string filepath, int x, int y, SDL_Renderer* render);
 	~Enemy();
 
 private:
