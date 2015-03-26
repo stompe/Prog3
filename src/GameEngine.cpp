@@ -13,8 +13,11 @@ GameEngine::GameEngine(std::string game_title, int window_width, int window_heig
 
 	frame_ms = 1000.0 / frames_per_second;
 	window = NULL;
-	screen_surface = NULL;
-	init();
+
+	if(init() == false)
+	{
+		printf("initialize failed!\n");
+	}
 }
 
 GameEngine::~GameEngine()
@@ -30,15 +33,21 @@ GameEngine::~GameEngine()
 
 	SDL_DestroyWindow(window);
 	window = NULL;
+
+	Mix_Quit();
+
 	SDL_Quit();
 	printf("\nWindow deconstructed");
 }
 
-void GameEngine::init()
+bool GameEngine::init()
 {
+	bool successful_init = true;
+
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		printf("SDL could not initialize SDL_ERROR: %s\n", SDL_GetError() );
+		successful_init = false;
 	}
 	else
 	{
@@ -47,27 +56,33 @@ void GameEngine::init()
 		if(window == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError() );
-		}
-		else
-		{
-
+			successful_init = false;
 		}
 		if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		{
-			printf("kunde inte ladda Mixer\n");
+			printf("Mixer could not be initialized! SDL_Error: %s\n", SDL_GetError());
+			successful_init = false;
 		}
 	}
 
 	render = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	if(render == NULL)
+	{
+		printf("Render could not be created! SDL_Error: %s\n", SDL_GetError());
+		successful_init = false;
+	}
+
 	SDL_SetRenderDrawColor(render, 0,255,0,255);
+
+	return successful_init;
 }
 
 void GameEngine::run()
 {
 
-
 	bool quit = false;
-	level->playMusic();
+
 	while(!quit)
 	{
 		frame_start = SDL_GetTicks();
@@ -101,7 +116,7 @@ void GameEngine::run()
 
 void GameEngine::handleInput()
 {
-	level->handleInput(event);
+	level->handleInput();
 }
 
 void GameEngine::update()

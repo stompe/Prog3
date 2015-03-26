@@ -3,7 +3,6 @@
 Level::Level(std::string level_name)
 {
 	this->level_name = level_name;
-	music = Mix_LoadMUS("res/song.wav");
 }
 
 Level::~Level()
@@ -15,13 +14,16 @@ Level::~Level()
 
 	delete controller;
 
+	Mix_FreeMusic(music);
+	music = NULL;
+
 	sprite_list.clear();
 	printf("\nLevel deconstructed");
 }
 
-void Level::handleInput(SDL_Event event)
+void Level::handleInput()
 {
-	controller->handleControllerInput(event, sprite_list);
+	controller->handleControllerInput(sprite_list);
 }
 
 void Level::draw(SDL_Renderer* render)
@@ -41,7 +43,7 @@ void Level::update()
 	}
 }
 
-void Level::add(DynamicSprite* sprite)
+void Level::addSprite(Sprite* sprite)
 {
 	sprite_list.push_back(sprite);
 }

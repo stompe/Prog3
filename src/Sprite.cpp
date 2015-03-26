@@ -3,9 +3,12 @@
 Sprite::Sprite(std::string filepath, int x, int y, SDL_Renderer* render)
 {
 	this->filepath = filepath;
+
 	this->x = x;
 	this->y = y;
+
 	SDL_Surface* image = SDL_LoadBMP(filepath.c_str());
+
 	this->width = image->w;
 	this->height = image->h;
 
@@ -15,9 +18,8 @@ Sprite::Sprite(std::string filepath, int x, int y, SDL_Renderer* render)
 	offset.h = height;
 
 	texture = SDL_CreateTextureFromSurface(render, image);
+	
 	SDL_FreeSurface(image);
-
-
 }
 
 Sprite::~Sprite()

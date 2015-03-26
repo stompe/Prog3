@@ -12,28 +12,29 @@ class Controller
 
 public:
 
-	Controller(Player* player);
+	Controller(DynamicSprite* controlled_sprite);
 	~Controller();
 
-	inline Player* getControllerPlayer(){return player;}
-	inline void setControllerPlayer(Player* new_player){player = new_player;}
+	inline DynamicSprite* getControlledSprite(){return controlled_sprite;}
+	inline void setControllerPlayer(DynamicSprite* new_controlled_sprite){controlled_sprite = new_controlled_sprite;}
 
 	void moveControllerPlayerInX(int xPixels);
 	void moveControllerPlayerInY(int yPixels);
 
-	void handleControllerInput(SDL_Event event, std::vector<DynamicSprite*> sprites);
+	void handleControllerInput(std::vector<Sprite*> sprites);
 
-	bool checkAllCollision(std::vector<DynamicSprite*> sprites);
+	bool checkAllCollision(std::vector<Sprite*> sprites);
 	bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);
 
+	inline KeyboardHandler* getKeyboardHandler(){return keyboard_handler;}
 
+	virtual void executeControllerInput(std::vector<Sprite*> sprites);
+	
 private:
 
-	Player* player;
+	DynamicSprite* controlled_sprite;
 	KeyboardHandler* keyboard_handler;
-	Mix_Chunk* sound;
 
-	void executeControllerInput(std::vector<DynamicSprite*> sprites);
 };
 
 #endif

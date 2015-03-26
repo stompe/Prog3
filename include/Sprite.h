@@ -31,7 +31,9 @@ public:
 	inline std::string getSpriteFilepath(){return filepath;}
 	inline void setSpriteFilepath(std::string new_filepath){filepath = new_filepath;}
 
-
+	inline SDL_Texture* getSpriteTexture(){return texture;}
+	inline void setSpriteTexture(SDL_Texture* new_texture){texture = new_texture;}
+	
 private:
 
 	int width;

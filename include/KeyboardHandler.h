@@ -13,7 +13,6 @@ public:
 	bool isReleased(int keyCode);
 
 private:
-	//const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 };
 
 #endif

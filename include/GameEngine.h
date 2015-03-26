@@ -42,18 +42,15 @@ public:
 	inline void setWindowDelayMs(float new_delay_ms){delay_ms = new_delay_ms;}
 
 	inline SDL_Window* getWindow(){return window;}
-	inline SDL_Surface* getWindowScreenSurface(){return screen_surface;}
 	inline SDL_Texture* getWindowTexture(){return screen_texture;}
 	inline SDL_Renderer* getWindowRenderer(){return render;}
 
 	inline void setWindow(SDL_Window* new_window){window = new_window;}
-	inline void setWindowScreenSurface(SDL_Surface* new_screen_surface){screen_surface = new_screen_surface;}
 	inline void setWindowTexture(SDL_Texture* new_screen_texture){screen_texture = new_screen_texture;}
 	inline void setWindowRenderer(SDL_Renderer* new_render){render = new_render;}
 
 private:
 
-	//LevelManager level_manager;
 	std::string title;
 
 	Level* level;
@@ -72,11 +69,10 @@ private:
 	float frame_ms;
 
 	SDL_Window* window;
-	SDL_Surface* screen_surface;
 	SDL_Texture* screen_texture;
 	SDL_Renderer* render;
 
-	void init();
+	bool init();
 	void handleInput();
 	void update();
 	void draw();

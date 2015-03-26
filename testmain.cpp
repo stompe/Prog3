@@ -2,7 +2,7 @@
 #include "include/DynamicSprite.h"
 #include "include/Level.h"
 #include "include/Player.h"
-#include "include/Controller.h"
+#include "GameController.h"
 
 int main(int argc, char* args[])
 {
@@ -18,15 +18,15 @@ int main(int argc, char* args[])
 
 	Player* player_one = new Player("Adam",spritetwo);
 
-	Controller* controller = new Controller(player_one);
+	GameController* controller = new GameController(player_one->getPlayerSprite());
 
 	level->setLevelController(controller);
 
 	level->addBackground(background);
-	level->add(player_one->getPlayerSprite());
-	level->add(spritethree);
-	level->add(spritefour);
-	level->add(spritefive);
+	level->addSprite(player_one->getPlayerSprite());
+	level->addSprite(spritethree);
+	level->addSprite(spritefour);
+	level->addSprite(spritefive);
 
 	gameEngine->setWindowLevel(level);
 
