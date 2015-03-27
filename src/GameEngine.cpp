@@ -121,7 +121,7 @@ void GameEngine::handleInput()
 
 void GameEngine::update()
 {
-	level->update();
+	level->update(gravity);
 }
 
 void GameEngine::draw()

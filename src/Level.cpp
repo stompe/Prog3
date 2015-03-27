@@ -7,9 +7,14 @@ Level::Level(std::string level_name)
 
 Level::~Level()
 {
-	for(int i = 0; i < sprite_list.size(); i++)
+	for(int i = 0; i < static_sprite_list.size(); i++)
 	{
-		delete sprite_list[i];
+		delete static_sprite_list[i];
+	}
+
+	for(int i = 0; i < dynamic_sprite_list.size(); i++)
+	{
+		delete dynamic_sprite_list[i];
 	}
 
 	delete controller;
@@ -17,36 +22,50 @@ Level::~Level()
 	Mix_FreeMusic(music);
 	music = NULL;
 
-	sprite_list.clear();
+	static_sprite_list.clear();
+	dynamic_sprite_list.clear();
 	printf("\nLevel deconstructed");
 }
 
 void Level::handleInput()
 {
-	controller->handleControllerInput(sprite_list);
+	controller->handleControllerInput(static_sprite_list, dynamic_sprite_list);
 }
 
 void Level::draw(SDL_Renderer* render)
 {	
 	background->draw(render);
-	for(int i = 0; i < sprite_list.size(); i++)
+	for(int i = 0; i < static_sprite_list.size(); i++)
 	{
-		sprite_list[i]->draw(render);
+		static_sprite_list[i]->draw(render);
+	}
+
+	for(int i = 0; i < dynamic_sprite_list.size(); i++)
+	{
+		dynamic_sprite_list[i]->draw(render);
+	}
+
+}
+
+void Level::update(int gravity)
+{
+	for(int i = 0; i < static_sprite_list.size(); i++)
+	{
+		static_sprite_list[i]->update();
+	}
+
+	for(int i = 0; i < dynamic_sprite_list.size(); i++)
+	{
+		dynamic_sprite_list[i]->update(gravity);
+		if(dynamic_sprite_list[i] == controller->getControlledSprite())
+		{
+			if(controller->checkAllCollision(static_sprite_list, dynamic_sprite_list))
+				controller->getControlledSprite()->update(-gravity);
+		}
 	}
 }
 
-void Level::update()
-{
-	for(int i = 0; i < sprite_list.size(); i++)
-	{
-		sprite_list[i]->update();
-	}
-}
 
-void Level::addSprite(Sprite* sprite)
-{
-	sprite_list.push_back(sprite);
-}
 
 void Level::addBackground(Sprite* background)
 {

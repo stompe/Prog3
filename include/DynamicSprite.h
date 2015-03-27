@@ -16,7 +16,7 @@ public:
 	
 	void move(int xPixels, int yPixels);
 
-	void update();
+	void update(int gravity);
 
 private:
 

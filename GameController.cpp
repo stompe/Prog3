@@ -5,44 +5,44 @@
 
 	}
 
-void GameController::executeControllerInput(std::vector<Sprite*> sprites)
+void GameController::executeControllerInput(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites)
 {
 	if(getKeyboardHandler()->isPressed(SDL_SCANCODE_UP))
 	{
-		moveControllerPlayerInY(-5);
-		if(checkAllCollision(sprites))
+		moveControllerPlayerInY(-4);
+		if(checkAllCollision(static_sprites, dynamic_sprites))
 		{
 			printf("Collision top\n");
-			moveControllerPlayerInY(-(-5));
+			moveControllerPlayerInY(-(-4));
 		}
 	}
 
 	if(getKeyboardHandler()->isPressed(SDL_SCANCODE_DOWN))
 	{
-		moveControllerPlayerInY(5);
-		if(checkAllCollision(sprites))
+		moveControllerPlayerInY(4);
+		if(checkAllCollision(static_sprites, dynamic_sprites))
 		{
 			printf("Collision bot\n");
-			moveControllerPlayerInY(-(5));
+			moveControllerPlayerInY(-(4));
 		}
 	}
 
 	if(getKeyboardHandler()->isPressed(SDL_SCANCODE_LEFT))
 	{
-		moveControllerPlayerInX(-5);
-		if(checkAllCollision(sprites))
+		moveControllerPlayerInX(-4);
+		if(checkAllCollision(static_sprites, dynamic_sprites))
 		{
 			printf("Collision left\n");
-			moveControllerPlayerInX(-(-5));
+			moveControllerPlayerInX(-(-4));
 		}
 	}
 	if(getKeyboardHandler()->isPressed(SDL_SCANCODE_RIGHT))
 	{
-		moveControllerPlayerInX(5);
-		if(checkAllCollision(sprites))
+		moveControllerPlayerInX(4);
+		if(checkAllCollision(static_sprites, dynamic_sprites))
 		{
 			printf("Collision right\n");
-			moveControllerPlayerInX(-(5));
+			moveControllerPlayerInX(-(4));
 		}
 	}
 }

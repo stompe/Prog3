@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include "Player.h"
+#include "StaticSprite.h"
 #include "SDL2/SDL.h"
 #include "KeyboardHandler.h"
 #include "SDL2/SDL_mixer.h"
@@ -21,14 +22,14 @@ public:
 	void moveControllerPlayerInX(int xPixels);
 	void moveControllerPlayerInY(int yPixels);
 
-	void handleControllerInput(std::vector<Sprite*> sprites);
+	void handleControllerInput(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites);
 
-	bool checkAllCollision(std::vector<Sprite*> sprites);
+	bool checkAllCollision(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites);
 	bool checkCollision(SDL_Rect rectA, SDL_Rect rectB);
 
 	inline KeyboardHandler* getKeyboardHandler(){return keyboard_handler;}
 
-	virtual void executeControllerInput(std::vector<Sprite*> sprites);
+	virtual void executeControllerInput(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites);
 	
 private:
 

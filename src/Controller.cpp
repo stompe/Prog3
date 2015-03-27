@@ -22,33 +22,52 @@ void Controller::moveControllerPlayerInY(int yPixels)
 	controlled_sprite->moveInY(yPixels);
 }
 
-void Controller::handleControllerInput(std::vector<Sprite*> sprites)
+void Controller::handleControllerInput(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites)
 {
-	executeControllerInput(sprites);
+	executeControllerInput(static_sprites, dynamic_sprites);
 }
 
-void Controller::executeControllerInput(std::vector<Sprite*> sprites){}
+void Controller::executeControllerInput(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites){}
 
-bool Controller::checkAllCollision(std::vector<Sprite*> sprites)
+bool Controller::checkAllCollision(std::vector<StaticSprite*> static_sprites, std::vector<DynamicSprite*> dynamic_sprites)
 {
 	bool collided = NULL;
 	SDL_Rect a, b;
 	DynamicSprite* pSprite = controlled_sprite;
 	a.x = pSprite->getSpriteXPosition();
 	a.y = pSprite->getSpriteYPosition();
-	a.h = pSprite->getSpriteWidth();
-	a.w = pSprite->getSpriteHeight();
+	a.w = pSprite->getSpriteWidth();
+	a.h = pSprite->getSpriteHeight();
 
 
-	for(int i = 0; i < sprites.size(); i++)
+	for(int i = 0; i < static_sprites.size(); i++)
 	{
-		if(sprites[i] != pSprite)
+	
+			StaticSprite* sSprite = static_sprites[i];
+			b.x = sSprite->getSpriteXPosition();
+			b.y = sSprite->getSpriteYPosition();
+			b.w = sSprite->getSpriteWidth();
+			b.h = sSprite->getSpriteHeight();
+			if(checkCollision(a,b))
+			{	
+				collided = true;
+				return collided;
+			}
+			else
+				collided = false;
+
+	
+	}
+
+	for(int i = 0; i < dynamic_sprites.size(); i++)
+	{
+		if(dynamic_sprites[i] != pSprite)
 		{
-				Sprite* s = sprites[i];
-				b.x = s->getSpriteXPosition();
-				b.y = s->getSpriteYPosition();
-				b.h = s->getSpriteWidth();
-				b.w = s->getSpriteHeight();
+				DynamicSprite* dSprite = dynamic_sprites[i];
+				b.x = dSprite->getSpriteXPosition();
+				b.y = dSprite->getSpriteYPosition();
+				b.w = dSprite->getSpriteWidth();
+				b.h = dSprite->getSpriteHeight();
 				if(checkCollision(a,b))
 				{	
 					collided = true;
@@ -59,6 +78,7 @@ bool Controller::checkAllCollision(std::vector<Sprite*> sprites)
 
 		}
 	}
+
 	return collided;
 }
 

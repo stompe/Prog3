@@ -27,7 +27,9 @@ void DynamicSprite::move(int xPixels, int yPixels)
 	setSpritePosition(getSpriteXPosition() + xPixels, getSpriteYPosition() + yPixels);
 }
 
-void DynamicSprite::update()
+void DynamicSprite::update(int gravity)
 {
+	setSpriteYPosition(getSpriteYPosition() + gravity);
 	Sprite::update();
+
 }

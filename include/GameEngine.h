@@ -38,6 +38,9 @@ public:
 	inline float getWindowFrameMs(){return frame_ms;}
 	inline float getWindowDelayMs(){return delay_ms;}
 
+
+	inline int getGravity(){return gravity;};
+	inline int setGravity(int gravity){this->gravity = gravity;};
 	inline void setWindowFrameMs(float new_frame_ms){frame_ms = new_frame_ms;}
 	inline void setWindowDelayMs(float new_delay_ms){delay_ms = new_delay_ms;}
 
@@ -67,6 +70,9 @@ private:
 
 	float delay_ms;
 	float frame_ms;
+
+	int gravity;
+
 
 	SDL_Window* window;
 	SDL_Texture* screen_texture;
