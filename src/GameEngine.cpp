@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include <iostream>
 
+//Event used to see if application should end
 SDL_Event event;
 
+//Constructor for GameEngine setting dimensions of the window, framerate, caption title and initializes the application
 GameEngine::GameEngine(std::string game_title, int window_width, int window_height, int fps)
 {
 	title = game_title;
@@ -20,12 +22,10 @@ GameEngine::GameEngine(std::string game_title, int window_width, int window_heig
 	}
 }
 
+//Destructor for GameEngine, destroys the renderer and window and all the elements in the active level
 GameEngine::~GameEngine()
 {
 	delete level;
-	SDL_DestroyTexture(screen_texture);
-	screen_texture = NULL;
-	printf("\nTexture deconstructed");
 
 	SDL_DestroyRenderer(render);
 	render = NULL;
@@ -40,6 +40,7 @@ GameEngine::~GameEngine()
 	printf("\nWindow deconstructed");
 }
 
+//Sets up SDL, window, renderer and mixer
 bool GameEngine::init()
 {
 	bool successful_init = true;
@@ -78,6 +79,7 @@ bool GameEngine::init()
 	return successful_init;
 }
 
+//Game loop updating the logic and drawing of the game
 void GameEngine::run()
 {
 
@@ -114,16 +116,19 @@ void GameEngine::run()
 	}
 }
 
+//Handles the input of the game
 void GameEngine::handleInput()
 {
 	level->handleInput();
 }
 
+//Updates the logic of the game
 void GameEngine::update()
 {
 	level->update(gravity);
 }
 
+//Draws the graphics of the game
 void GameEngine::draw()
 {
 	SDL_SetWindowTitle(window, level->getLevelName().c_str());
