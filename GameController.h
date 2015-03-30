@@ -4,6 +4,8 @@
 #include "include/Controller.h"
 #include "include/StaticSprite.h"
 
+
+//class implemented to controll our player
 class GameController : public Controller
 {
 public:

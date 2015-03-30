@@ -2,6 +2,8 @@
 #define STATICSPRITE_H
 #include "Sprite.h"
 
+// A class to represent sprites that cant move in the game
+
 class StaticSprite : public Sprite
 {
 

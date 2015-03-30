@@ -10,6 +10,7 @@ void KeyboardHandler::handleKeyboardEvent()
 
 }
 
+// check wich keys are pressed
 bool KeyboardHandler::isPressed(int keyCode)
 {
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
@@ -17,6 +18,7 @@ bool KeyboardHandler::isPressed(int keyCode)
 	return (keystate[keyCode] == 1);
 }
 
+// check wich keys are not pressed
 bool KeyboardHandler::isReleased(int keyCode)
 {
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);

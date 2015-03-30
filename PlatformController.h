@@ -4,6 +4,10 @@
 #include "include/Controller.h"
 #include "include/StaticSprite.h"
 
+
+// class to controll platforms in the game
+// they can move in x or y
+// and they have a min and max position to move between
 class PlatformController : public Controller
 {
 public:
